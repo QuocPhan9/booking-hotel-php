@@ -9,8 +9,8 @@
     <nav class="navbar navbar-expand-lg navbar-primary ">
         <div class="container-fluid flex-lg-column align-items-stretch">
             <h4 class="mt-2 text-white">FILTERS</h4>
-            <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#adminDropdown">
-                <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler shadow-none " type="button" data-bs-toggle="collapse" data-bs-target="#adminDropdown">
+                <span class="navbar-toggler-icon"><span class="fa fa-bars text-white"></span></span>
             </button>
             <div class="collapse navbar-collapse flex-column align-items-stretch mt-2" id="adminDropdown">
                 <ul class="nav nav-pills flex-column">
