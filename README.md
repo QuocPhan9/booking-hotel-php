@@ -1,5 +1,5 @@
 
-Note: The folder must be located in htdocs folder
+Note: The folder must be located in htdocs folder. If placed in another folder, the path in the code must be changed.
 1. Clone code folder into htdocs folder
 2. Copy link: http://localhost/booking-hotel-php/
 3. Use code mySQL create database
