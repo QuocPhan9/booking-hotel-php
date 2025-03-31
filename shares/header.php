@@ -1,5 +1,11 @@
+
+<?php 
+    require('admin/database/db_config.php');
+    require('admin/shares/essentials.php');
+?>
+
 <div class="container-fluid position-relative p-0">
-<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm fixed-top">
+    <nav id="nav-bar" class="navbar navbar-expand-lg navbar-light bg-light shadow-sm fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">
                 <h1 class="text-success m-0">
@@ -13,7 +19,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="rooms.php">Rooms</a></li>
-                    <li class="nav-item"><a class="nav-link" href="service.php">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="service.php">Facilities</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
                 </ul>
@@ -109,7 +115,8 @@
             </div>
         </div>
     </div>
-
+    <!-- Reach us -->
+   
     <div class="container-fluid bg-primary py-5 mb-2 hero-header">
         <div class="container py-5">
             <div class="row justify-content-center py-5">
