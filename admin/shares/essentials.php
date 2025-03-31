@@ -2,10 +2,12 @@
     //frontend purpose data
     define('SITE_URL','http://127.0.0.1/booking-hotel-php/');
     define('ABOUT_IMG_PATH', SITE_URL.'/img/about/');
+    define('FACILITIES_IMG_PATH', SITE_URL.'/img/facilities/');
 
     //backend upload process needs this data
     define('UPLOAD_IMAGE_PATH', $_SERVER['DOCUMENT_ROOT'].'/booking-hotel-php/img/');
     define('ABOUT_FOLDER', 'about/');
+    define('FACILITIES_FOLDER', 'facilities/');
 
 
     function adminLogin() {
@@ -59,6 +61,28 @@
         }
 
     }
+    
+    function uploadSVGImage($image, $folder) {
+        $valid_mime = ['image/svg+xml'];
+        $img_mime = $image['type'];
+
+        if(!in_array($img_mime, $valid_mime)) {
+            return 'inv_img';
+        } else if(($image['size']/(1024*1024)) > 2) {
+            return 'inv_size';
+        } else {
+            $ext = pathinfo($image['name'], PATHINFO_EXTENSION);
+            $rname = 'IMG_'.random_int(11111,99999).".$ext";
+
+            $img_path = UPLOAD_IMAGE_PATH.$folder.$rname;
+            if(move_uploaded_file($image['tmp_name'], $img_path)) {
+                return $rname;
+            } else {
+                return 'upd_failed';
+            }
+        }
+
+    }
 
     function deleteImage($image, $folder) {
         if(unlink(UPLOAD_IMAGE_PATH.$folder.$image)) {
@@ -67,4 +91,6 @@
             return false;
         }
     }
+
+
 ?>
