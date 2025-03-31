@@ -8,38 +8,7 @@
     <meta content name="keywords">
     <meta content name="description">
 
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
-
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap"
-        rel="stylesheet">
-
-    <!-- Icon Font Stylesheet -->
-    <link
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
-        rel="stylesheet">
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
-        rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css"
-        rel="stylesheet">
-    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css"
-        rel="stylesheet" />
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
+    <?php require('shares/links.php');?>
     <style>
         .custom-bg {
             background-color: #86B817;
@@ -374,8 +343,8 @@
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h6 class="section-title bg-white text-center text-primary px-3">Services</h6>
-                <h1 class="mb-5">Our Services</h1>
+                <h6 class="section-title bg-white text-center text-primary px-3">Facilities</h6>
+                <h1 class="mb-5">Our Facilities</h1>
             </div>
             <div class="row g-4 justify-content-center">
                 <div class="col-lg-3 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="0.1s">
@@ -427,86 +396,30 @@
                 <h1 class="mb-5">Meet Our Guide</h1>
             </div>
             <div class="row g-4 justify-content-center">
-                <div class="col-lg-2 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="team-item">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="img/team-1.jpg" alt="Guide 1">
-                        </div>
-                        <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
-                            <a class="btn btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square mx-1" href="#"><i class="fab fa-instagram"></i></a>
-                        </div>
-                        <div class="text-center p-4">
-                            <h5 class="mb-0">John Doe</h5>
-                            <small>Senior Guide</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="team-item">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="img/team-2.jpg" alt="Guide 2">
-                        </div>
-                        <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
-                            <a class="btn btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square mx-1" href="#"><i class="fab fa-instagram"></i></a>
-                        </div>
-                        <div class="text-center p-4">
-                            <h5 class="mb-0">Jane Smith</h5>
-                            <small>Tour Expert</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="team-item">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="img/team-3.jpg" alt="Guide 3">
-                        </div>
-                        <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
-                            <a class="btn btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square mx-1" href="#"><i class="fab fa-instagram"></i></a>
-                        </div>
-                        <div class="text-center p-4">
-                            <h5 class="mb-0">Mike Johnson</h5>
-                            <small>Adventure Specialist</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="0.7s">
-                    <div class="team-item">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="img/team-4.jpg" alt="Guide 4">
-                        </div>
-                        <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
-                            <a class="btn btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square mx-1" href="#"><i class="fab fa-instagram"></i></a>
-                        </div>
-                        <div class="text-center p-4">
-                            <h5 class="mb-0">Emily Brown</h5>
-                            <small>Cultural Guide</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="0.9s">
-                    <div class="team-item">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="img/team-4.jpg" alt="Guide 5">
-                        </div>
-                        <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
-                            <a class="btn btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square mx-1" href="#"><i class="fab fa-instagram"></i></a>
-                        </div>
-                        <div class="text-center p-4">
-                            <h5 class="mb-0">Alex Taylor</h5>
-                            <small>Local Expert</small>
-                        </div>
-                    </div>
-                </div>
+                <?php 
+                    $about_r = selectAll('team_details');
+                    $path = ABOUT_IMG_PATH;
+                    while($row = mysqli_fetch_assoc($about_r)){
+                        echo <<<data
+                            <div class="col-lg-2 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="0.1s">
+                                <div class="team-item">
+                                    <div class="overflow-hidden">
+                                        <img class="img-fluid" src="$path$row[picture]" alt="Guide 1">
+                                    </div>
+                                    <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
+                                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
+                                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-instagram"></i></a>
+                                    </div>
+                                    <div class="text-center p-4">
+                                        <h5 class="mb-0">John Doe</h5>
+                                        <small>$row[name]</small>
+                                    </div>
+                                </div>
+                            </div>
+                        data;
+                    }
+                ?>
             </div>
         </div>
     </div>
@@ -576,6 +489,16 @@
     <!-- Testimonial End -->
 
     <!-- Contact Start -->
+    <?php
+        $contact_q = "SELECT * FROM `contact_details` WHERE `sr_no`=?";
+        $values = [1];
+        $contact_r = mysqli_fetch_assoc(select($contact_q, $values, 'i'));
+    ?>
+    <?php
+        $setting_q = "SELECT * FROM `settings` WHERE `sr_no`=?";
+        $values = [1];
+        $setting_r = mysqli_fetch_assoc(select($setting_q, $values, 'i'));
+    ?>
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
@@ -587,10 +510,8 @@
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 wow fadeInUp"
                     data-wow-delay="0.1s">
-                    <h5>Get In Touch</h5>
-                    <p class="mb-4">Tempor erat elitr rebum at clita. Diam
-                        dolor diam ipsum sit. Aliqu diam amet diam et
-                        eos</p>
+                    <h5><?php echo $setting_r['site_title'] ?></h5>
+                    <p class="mb-4"><?php echo $setting_r['site_about'] ?></p>
                     <div class="d-flex align-items-center mb-4">
                         <div
                             class="d-flex align-items-center justify-content-center flex-shrink-0 bg-primary"
@@ -599,7 +520,7 @@
                         </div>
                         <div class="ms-3">
                             <h5 class="text-primary">Office</h5>
-                            <p class="mb-0">123 Street, New York, USA</p>
+                            <p class="mb-0"><?php echo $contact_r['address'] ?></p>
                         </div>
                     </div>
                     <div class="d-flex align-items-center mb-4">
@@ -610,7 +531,7 @@
                         </div>
                         <div class="ms-3">
                             <h5 class="text-primary">Mobile</h5>
-                            <p class="mb-0">+012 345 67890</p>
+                            <p class="mb-0">+<?php echo $contact_r['phone'] ?></p>
                         </div>
                     </div>
                     <div class="d-flex align-items-center">
@@ -621,14 +542,14 @@
                         </div>
                         <div class="ms-3">
                             <h5 class="text-primary">Email</h5>
-                            <p class="mb-0">info@example.com</p>
+                            <p class="mb-0"><?php echo $contact_r['email'] ?></p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp"
                     data-wow-delay="0.3s">
                     <iframe class="position-relative rounded w-100 h-100"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
+                        src="<?php echo $contact_r['iframe'] ?>"
                         frameborder="0" style="min-height: 300px; border:0;"
                         allowfullscreen aria-hidden="false"
                         tabindex="0"></iframe>
@@ -688,45 +609,7 @@
             class="bi bi-arrow-up"></i></a>
 
     <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-    <script>
-        const progressCircle = document.querySelector(".autoplay-progress svg");
-        const progressContent = document.querySelector(".autoplay-progress span");
-        var swiper = new Swiper(".swiper-testimonials", {
-            spaceBetween: 30,
-            centeredSlides: true,
-            autoplay: {
-                delay: 2500,
-                disableOnInteraction: false
-            },
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev"
-            },
-            on: {
-                autoplayTimeLeft(s, time, progress) {
-                    progressCircle.style.setProperty("--progress", 1 - progress);
-                    progressContent.textContent = `${Math.ceil(time / 1000)}s`;
-                }
-            }
-        });
-    </script>
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <?php require('shares/script.php')?>
 </body>
 
 </html>

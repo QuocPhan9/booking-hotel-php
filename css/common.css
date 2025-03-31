@@ -22,24 +22,8 @@ div.login-form {
     transform: translate(-50%, -50%);
     width: 450px;
  }
-.custom-alert {
-    position: fixed;
-    top: 80px;
-    right: 25px;
-}
-
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgb(134,184,23);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
+ .custom-alert {
+     position: fixed;
+     top: 80px;
+     right: 25px;
+ }
