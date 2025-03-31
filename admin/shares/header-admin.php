@@ -9,8 +9,8 @@
     <nav class="navbar navbar-expand-lg navbar-primary ">
         <div class="container-fluid flex-lg-column align-items-stretch">
             <h4 class="mt-2 text-white">FILTERS</h4>
-            <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#adminDropdown">
-                <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler shadow-none " type="button" data-bs-toggle="collapse" data-bs-target="#adminDropdown">
+                <span class="navbar-toggler-icon"><span class="fa fa-bars text-white"></span></span>
             </button>
             <div class="collapse navbar-collapse flex-column align-items-stretch mt-2" id="adminDropdown">
                 <ul class="nav nav-pills flex-column">
@@ -18,7 +18,10 @@
                         <a class="nav-link text-white" href="dashboard.php">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Rooms</a>
+                        <a class="nav-link text-white" href="rooms.php">Rooms</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="features_facilities.php">Features & Facilities</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="#">Users</a>
