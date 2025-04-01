@@ -8,7 +8,7 @@
     <meta content name="keywords">
     <meta content name="description">
 
-    <?php require('shares/links.php');?>
+    <?php require('shares/links.php'); ?>
     <style>
         .custom-bg {
             background-color: #86B817;
@@ -79,13 +79,13 @@
 
 <body>
     <!-- Spinner Start -->
-    <div id="spinner"
+    <!-- <div id="spinner"
         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary"
             style="width: 3rem; height: 3rem;" role="status">
             <span class="sr-only">Loading...</span>
         </div>
-    </div>
+    </div> -->
     <!-- Spinner End -->
 
     <!-- Navbar & Hero Start -->
@@ -396,11 +396,11 @@
                 <h1 class="mb-5">Meet Our Guide</h1>
             </div>
             <div class="row g-4 justify-content-center">
-                <?php 
-                    $about_r = selectAll('team_details');
-                    $path = ABOUT_IMG_PATH;
-                    while($row = mysqli_fetch_assoc($about_r)){
-                        echo <<<data
+                <?php
+                $about_r = selectAll('team_details');
+                $path = ABOUT_IMG_PATH;
+                while ($row = mysqli_fetch_assoc($about_r)) {
+                    echo <<<data
                             <div class="col-lg-2 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="team-item">
                                     <div class="overflow-hidden">
@@ -418,7 +418,7 @@
                                 </div>
                             </div>
                         data;
-                    }
+                }
                 ?>
             </div>
         </div>
@@ -490,14 +490,14 @@
 
     <!-- Contact Start -->
     <?php
-        $contact_q = "SELECT * FROM `contact_details` WHERE `sr_no`=?";
-        $values = [1];
-        $contact_r = mysqli_fetch_assoc(select($contact_q, $values, 'i'));
+    $contact_q = "SELECT * FROM `contact_details` WHERE `sr_no`=?";
+    $values = [1];
+    $contact_r = mysqli_fetch_assoc(select($contact_q, $values, 'i'));
     ?>
     <?php
-        $setting_q = "SELECT * FROM `settings` WHERE `sr_no`=?";
-        $values = [1];
-        $setting_r = mysqli_fetch_assoc(select($setting_q, $values, 'i'));
+    $setting_q = "SELECT * FROM `settings` WHERE `sr_no`=?";
+    $values = [1];
+    $setting_r = mysqli_fetch_assoc(select($setting_q, $values, 'i'));
     ?>
     <div class="container-xxl py-5">
         <div class="container">
@@ -609,7 +609,7 @@
             class="bi bi-arrow-up"></i></a>
 
     <!-- JavaScript Libraries -->
-    <?php require('shares/script.php')?>
+    <?php require('shares/script.php') ?>
 </body>
 
 </html>

@@ -44,16 +44,13 @@ function send_mail($uemail, $token, $type) // Function to send email using SendG
 
 if (isset($_POST['register'])) {
     $data = filteration($_POST);
-    // match password and confirm password
 
     if ($data['pass'] != $data['cpass']) {
         echo 'pass_mismatch';
         exit;
     }
 
-    //check user exits or not
-
-    $u_exists = select("SELECT * FROM `users` WHERE `email` = ? OR `phonenum` = ? LIMIT", [$data['email'], $data['phonenum']], "ii");
+    $u_exists = select("SELECT * FROM `users` WHERE `email` = ? OR `phonenum` = ? LIMIT 1", [$data['email'], $data['phonenum']], "ss");
 
     if (mysqli_num_rows($u_exists) != 0) {
         $u_exists_fetch = mysqli_fetch_assoc($u_exists);
@@ -61,33 +58,37 @@ if (isset($_POST['register'])) {
         exit;
     }
 
-    //send confirmation code to user email
+    $token = bin2hex(random_bytes(16));
 
-    $token = bin2hex(random_bytes(16)); // Generate a random token
-
-    if (!send_mail($data['email'], $token, "account_recovery")) {
+    if (!send_mail($data['email'], $token, "email_confirmation")) {
         echo 'mail_failed';
-    } else {
-        $date = date("Y-m-d");
-
-        $query = mysqli_query($con, "UPDATE `user_cred` SET `token` ='$token',`t_expire`='$date' WHERE `id`='$u_fetch[id]'");
+        exit;
     }
 
-    $enc_pass = password_hash($data['pass'], PASSWORD_BCRYPT); // Hash the password
+    $enc_pass = password_hash($data['pass'], PASSWORD_BCRYPT);
 
-    $query = "INSERT INTO `user_cred`(`name`, `email`, `address`, `phonenum`, `dob`, `password`,`token`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-    $values = [$data['name'], $data['email'], $data['address'], $data['phonenum'], $data['dob'], $enc_pass, $token]; // Prepare the values for the query
-    if (insert($query, $values, "ssssssss")) {
+    $query = "INSERT INTO `user_cred`(`name`, `email`, `address`, `phonenum`, `dob`, `password`, `token`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $values = [$data['name'], $data['email'], $data['address'], $data['phonenum'], $data['dob'], $enc_pass, $token];
+
+    if (insert($query, $values, "sssssss")) {
         echo 1;
     } else {
-        echo 'ins_failed'; // If the insert fails, return an error message
-    } // Insert the user data into the database
+        echo 'ins_failed';
+    }
 }
+
+
 
 if (isset($_POST['login'])) {
     $data = filteration($_POST);
 
-    $u_exists = select("SELECT * FROM `users` WHERE `email` = ? OR `phonenum` = ? LIMIT", [$data['email_mob'], $data['email_mob']], "ii");
+    $u_exists = select(
+        "SELECT * FROM `users` WHERE `email` = ? OR `phonenum` = ? LIMIT 1",
+        [$data['email_mob'], $data['email_mob']],
+        "ss"
+    );
+
+
 
     if (mysqli_num_rows($u_exists) == 0) {
         echo 'inv_email_mob';
