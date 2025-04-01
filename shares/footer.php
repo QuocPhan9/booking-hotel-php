@@ -3,17 +3,18 @@
     data-wow-delay="0.1s">
     <div class="container py-5">
         <div class="row g-5">
-            <div class="col-lg-8     col-md-6">
+            <?php
+            $contact_q = "SELECT * FROM `contact_details` WHERE `sr_no`=?";
+            $values = [1];
+            $contact_r = mysqli_fetch_assoc(select($contact_q, $values, 'i'));
+            ?>
+            <div class="col-lg-8 col-md-6">
                 <h4 class="text-white mb-3">Contact</h4>
+                <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i><?php echo $contact_r['address'] ?></p>
                 <p class="mb-2"><i
-                        class="fa fa-map-marker-alt me-3"></i>Phân khu
-                    đào tạo E1, Khu Công Nghệ cao TP.HCM, Phường Hiệp
-                    Phú, TP. Thủ Đức, TP.HCM</p>
+                        class="fa fa-phone-alt me-3"></i>+<?php echo $contact_r['phone'] ?></p>
                 <p class="mb-2"><i
-                        class="fa fa-phone-alt me-3"></i>+(028) 7105
-                    6686</p>
-                <p class="mb-2"><i
-                        class="fa fa-envelope me-3"></i>daotao@hutech.edu.vn</p>
+                        class="fa fa-envelope me-3"></i><?php echo $contact_r['email'] ?></p>
                 <div class="d-flex pt-2">
                     <a class="btn btn-outline-light btn-social"
                         href="#"><i
@@ -31,18 +32,17 @@
             </div>
             <div class="col-lg-2 col-md-6">
                 <h4 class="text-white mb-3">Company</h4>
-                <a class="btn btn-link" href="about.html">About Us</a>
-                <a class="btn btn-link" href="contact.html">Contact
-                    Us</a>
-                <a class="btn btn-link" href="#">Privacy Policy</a>
-                <a class="btn btn-link" href="#">Terms & Condition</a>
-                <a class="btn btn-link" href="#">FAQs & Help</a>
+                <a class="btn btn-link" href="index.php">Home</a>
+                <a class="btn btn-link" href="rooms.php">Rooms</a>
+                <a class="btn btn-link" href="service.php">Services</a>
+                <a class="btn btn-link" href="contact.php">Contact</a>
+                <a class="btn btn-link" href="about.php">About</a>
             </div>
         </div>
     </div>
 </div>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 <script>
     // Set the active class on the current page in the navbar
 
@@ -81,47 +81,31 @@
         }
     }
 
-    let register_form = document.getElementById('registerform');
+    let register_form = document.getElementById('register_form');
 
-    register_form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        let data = new FormData();
+    document.getElementById("register_form").addEventListener("submit", function(e) {
+        e.preventDefault(); // Ngăn chặn reload trang
 
-        data.append('name', register_form.elements['name'].value);
-        data.append('email', register_form.elements['email'].value);
-        data.append('phonenum', register_form.elements['phonenum'].value);
-        data.append('address', register_form.elements['address'].value);
-        data.append('pincode', register_form.elements['pincode'].value);
-        data.append('dob', register_form.elements['dob'].value);
-        data.append('pass', register_form.elements['pass'].value);
-        data.append('cpass', register_form.elements['cpass'].value);
-        data.append('register', '');
+        let formData = new FormData(this);
 
-        var Model = document.getElementById('registerModal');
-        var modal = bootstrap.Modal.getInstance(Model);
-        modal.hide();
+        fetch("/booking-hotel-php/shares/header.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data); // Xem kết quả server trả về
 
-        let xhr = new XMLHttpRequest();
-        xhr.open('POST', "ajax/login_regester.php", true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-        xhr.onload = function() {
-            if (this.responseText == 'pass_mismatch') {
-                alert('error', 'Password Mismatch!');
-            } else if (this.responseText == 'email_already') {
-                alert('error', 'Email Already registered');
-            } else if (this.responseText == 'phonenum_already') {
-                alert('error', 'Phone Number Already Exists');
-            } else if (this.responseText == 'mail_failed') {
-                alert('error', 'Email Sending Failed');
-            } else if (this.responseText == 1) {
-                alert('success', 'Registration Successful. Confirmation link sent to email!');
-                register_form.reset();
-            }
-        }
-        console.log(data);
-        xhr.send(data);
+                if (data.trim() === "1") {
+                    alert("Đăng ký thành công!");
+                    location.reload(); // Reload trang sau khi đăng ký thành công
+                } else {
+                    alert("Lỗi: " + data);
+                }
+            })
+            .catch(error => console.error("Error:", error));
     });
+
 
     let login_form = document.getElementById('login_form');
 
@@ -195,9 +179,6 @@
 
         xhr.send(data);
     });
-
-
-
 
     setActive();
 </script>
