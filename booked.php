@@ -648,9 +648,6 @@
                                         </div>
                                         
                                         <div class="actions-section">
-                                            <a href="room_details.php?id=${room.room_id || '1'}" class="details-btn">
-                                                <i class="bi bi-info-circle btn-icon"></i> Xem thêm chi tiết
-                                            </a>
                                             <button onclick="window.print()" class="print-btn no-print">
                                                 <i class="bi bi-printer btn-icon"></i> In xác nhận
                                             </button>
