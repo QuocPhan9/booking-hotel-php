@@ -81,6 +81,8 @@
         registerForm.addEventListener("submit", function(e) {
             e.preventDefault(); // Ngăn chặn form gửi đi mặc định
 
+            let formData = new FormData(registerForm); // Lấy dữ liệu từ form
+            formData.append("register", "");
 
             let xhr = new XMLHttpRequest();
 
