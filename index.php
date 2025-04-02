@@ -145,8 +145,6 @@
             <div class="container">
                 <div class="row">
                     <?php
-                        // include 'admin/database/db_config.php';
-                        // include 'admin/shares/essentials.php';
 
                         $room_res = select( "SELECT * FROM `rooms` WHERE `status` =? AND `removed` =? LIMIT 3", [1, 0], 'ii');
                         while($room_data = mysqli_fetch_assoc($room_res)) {
