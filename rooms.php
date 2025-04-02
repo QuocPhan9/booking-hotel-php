@@ -108,13 +108,17 @@
 
                 <div class="col-lg-9 col-md-12 px-4">
                     <?php
-                    require_once 'admin/database/db_config.php';
-                    require_once 'admin/shares/essentials.php';
 
 
                     $room_res = select("SELECT * FROM `rooms` WHERE `status` =? AND `removed` =?", [1, 0], 'ii');
-                    while ($room_data = mysqli_fetch_assoc($room_res)) {
 
+                    while ($room_data = mysqli_fetch_assoc($room_res)) {
+                        $book_btn = "";
+                        $login = 0;
+                        if (!isset($setting_r['shutdown']) || !$setting_r['shutdown']) {
+                            $login = isset($_SESSION["login"]) && $_SESSION["login"] == true;
+                            $book_btn = "<button class='btn btn-sm w-100 shadow-none btn-primary' onClick='checkLoginToBook($login, {$room_data['id']})'>Book now</button>";
+                        }
                         $fea_q = mysqli_query(
                             $conn,
                             "SELECT f.name FROM `features` f INNER JOIN `room_features` rfea 
@@ -179,7 +183,7 @@
                                         </div>  
                                         <div class="col-md-2 mt-lg-0 mt-md-0 mt-4 text-center">
                                             <h6 class="mb-4">$$room_data[price] per night</h6>
-                                            <a href="confirm_booking.php.php?id=$room_data[id]" class="btn btn-sm w-100 text-white bg-primary shadow-none mb-2">Book now</a>
+                                            $book_btn
                                             <a href="room_details.php?id=$room_data[id]" class="btn btn-sm w-100 btn-outline-dark shadow-none">More details</a>
                                         </div>
                                     </div>

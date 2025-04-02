@@ -79,13 +79,13 @@
 
 <body>
     <!-- Spinner Start -->
-    <!-- <div id="spinner"
+    <div id="spinner"
         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary"
             style="width: 3rem; height: 3rem;" role="status">
             <span class="sr-only">Loading...</span>
         </div>
-    </div> -->
+    </div>
     <!-- Spinner End -->
 
     <!-- Navbar & Hero Start -->
@@ -145,8 +145,6 @@
             <div class="container">
                 <div class="row">
                     <?php
-                    require_once 'admin/database/db_config.php';
-                    require_once 'admin/shares/essentials.php';
 
                     $room_res = select("SELECT * FROM `rooms` WHERE `status` = ? AND `removed` = ? LIMIT 3", [1, 0], 'ii');
                     while ($room_data = mysqli_fetch_assoc($room_res)) {
@@ -181,7 +179,7 @@
                         $book_btn = "";
                         $login = 0;
                         if (!isset($setting_r['shutdown']) || !$setting_r['shutdown']) {
-                            $login = isset($_SESSION['login']) && $_SESSION['login'] == true ? 1 : 0;
+                            $login = isset($_SESSION["login"]) && $_SESSION["login"] == true ? 1:0;
                             $book_btn = "<button class='btn btn-sm text-black custom-bg shadow-none btn-primary' onClick='checkLoginToBook($login, {$room_data['id']})'>Book now</button>";
                         }
                         echo <<<HTML

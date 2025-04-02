@@ -3,207 +3,84 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Tourist - Room Details</title>
+    <title>Tourist - Travel Agency</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content name="keywords">
     <meta content name="description">
 
     <?php require('shares/links.php'); ?>
-
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
-
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <style>
-        :root {
-            --primary: #0d6efd;
-            --secondary: #6c757d;
-            --light: #f8f9fa;
-            --dark: #212529;
+        .custom-bg {
+            background-color: #86B817;
         }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f8f9fa;
-            color: #5a5a5a;
+        .custom-bg:hover {
+            background-color: #98c33a;
         }
 
-        .section-title {
+        .availability-form {
+            margin-top: -80px;
+            z-index: 2;
             position: relative;
-            display: inline-block;
-            letter-spacing: 1px;
-            font-weight: 600;
-            text-transform: uppercase;
         }
 
-        .section-title::before {
-            position: absolute;
-            content: "";
-            top: 50%;
-            left: -55px;
-            width: 45px;
-            height: 2px;
-            background: var(--primary);
+        .swiper {
+            width: 100%;
+            height: 100%;
         }
 
-        .section-title::after {
-            position: absolute;
-            content: "";
-            top: 50%;
-            right: -55px;
-            width: 45px;
-            height: 2px;
-            background: var(--primary);
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .room-gallery img {
-            border-radius: 10px;
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            height: 400px;
         }
 
-        .room-info-card {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-        }
-
-        .room-info-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
-        }
-
-        .feature-badge {
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
-            padding: 0.5rem 1rem;
-            font-size: 0.85rem;
-        }
-
-        .price-tag {
-            background-color: var(--primary);
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            display: inline-block;
-        }
-
-        .booking-form {
-            background: linear-gradient(rgba(15, 23, 43, 0.7), rgba(15, 23, 43, 0.7)), url('img/booking-bg.jpg');
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .booking-form .form-control {
-            height: 50px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: white;
-        }
-
-        .booking-form .form-control::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .booking-form .form-control:focus {
-            box-shadow: none;
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .booking-form select.form-control option {
-            color: var(--dark);
-        }
-
-        .booking-form textarea.form-control {
-            height: 120px;
-        }
-
-        .process-box {
-            position: relative;
-            padding: 2rem;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-            background-color: white;
-            transition: all 0.3s;
-        }
-
-        .process-box:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
-        }
-
-        .process-icon {
-            width: 80px;
-            height: 80px;
+        .autoplay-progress {
+            position: absolute;
+            right: 16px;
+            bottom: 16px;
+            z-index: 10;
+            width: 48px;
+            height: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: var(--primary);
-            color: white;
-            border-radius: 50%;
-            margin: -50px auto 1rem;
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+            color: var(--swiper-theme-color);
         }
 
-        .reviews-section {
-            background-color: white;
-            border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-        }
-
-        .review-item {
-            border-bottom: 1px solid #eee;
-            padding-bottom: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .review-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .review-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .back-to-top {
-            position: fixed;
-            display: none;
-            right: 30px;
-            bottom: 30px;
-            z-index: 99;
+        .autoplay-progress svg {
+            --progress: 0;
+            position: absolute;
+            left: 0;
+            top: 0px;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            stroke-width: 4px;
+            stroke: var(--swiper-theme-color);
+            fill: none;
+            stroke-dashoffset: calc(125.6px * (1 - var(--progress)));
+            stroke-dasharray: 125.6;
+            transform: rotate(-90deg);
         }
     </style>
 </head>
 
 <body>
 
+    <?php require('shares/header.php'); ?>
     <?php
-    require_once 'admin/database/db_config.php';
-    require_once 'admin/shares/essentials.php';
 
     if (!isset($_GET['id'])) {
         redirect('rooms.php');
@@ -223,7 +100,7 @@
         <!-- Spinner content -->
     </div>
 
-    <?php require('shares/header.php'); ?>
+    
 
 
     <!-- Room Details Start -->
@@ -381,10 +258,15 @@
                     </div>
 
                     <div class="d-grid gap-2">
-                        <a href="confirm_booking.php?id=<?= $room_data['id'] ?>"
-                            class="btn btn-primary py-3 rounded-pill fw-bold">
-                            <i class="fas fa-check-circle me-2"></i>Xác nhận đặt phòng
-                        </a>
+                        <?php
+                        $book_btn = "";
+                        $login = 0;
+                        if (!isset($setting_r['shutdown']) || !$setting_r['shutdown']) {
+                            $login = isset($_SESSION["login"]) && $_SESSION["login"] == true ? 1:0;
+                            $book_btn = "<button class='btn btn-primary py-3 rounded-pill fw-bold' onClick='checkLoginToBook($login, {$room_data['id']})'><i class='fas fa-check-circle me-2'></i>Xác nhận đặt phòng</button>";
+                        }
+                        echo $book_btn;
+                        ?>
 
                         <button class="btn btn-outline-primary rounded-pill">
                             <i class="far fa-heart me-2"></i>Lưu vào yêu thích
@@ -393,7 +275,6 @@
 
                     <!-- Room Amenities Card -->
                     <?php
-                    require_once 'admin/database/db_config.php';
 
                     // Fetch facilities
                     $fac_q = mysqli_query(
@@ -505,3 +386,4 @@
                 </div>
             </div>
         </div>
+        <?php require'shares/footer.php'?>

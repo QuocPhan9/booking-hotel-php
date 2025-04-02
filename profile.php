@@ -117,10 +117,9 @@
                     <h3>Hồ sơ cá nhân</h3>
                 </div>
                 <div class="card-body text-center">
-                    <img src="/path/to/avatar.jpg" class="rounded-circle mb-3" width="120" height="120" alt="Avatar">
-                    <h4 id="username">Tên Người Dùng</h4>
-                    <p id="email">email@example.com</p>
-                    <p id="phone">0123-456-789</p>
+                    <h4 id="username"><?php echo $_SESSION['name']?></h4>
+                    <p id="email"><?php echo $_SESSION['email']?></p>
+                    <p id="phone"><?php echo $_SESSION['phonenum']?></p>
                     <a href="#" class="btn btn-warning">Chỉnh sửa thông tin</a>
                 </div>
             </div>

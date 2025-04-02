@@ -25,8 +25,6 @@ $id_room = $_SESSION['id_room'] ?? '';
 $check_in = $_SESSION['check_in'] ?? '';
 $check_out = $_SESSION['check_out'] ?? '';
 
-echo $check_in;
-echo $check_out;
 if (empty($customer_name) && isset($_GET['vnp_TxnRef'])) {
     $order_id = $_GET['vnp_TxnRef'];
     // Kiểm tra trong bảng tạm nếu có
