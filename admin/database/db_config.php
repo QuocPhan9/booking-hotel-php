@@ -7,16 +7,8 @@ $db = 'db_booking';
 $conn = mysqli_connect($hname, $uname, $pass, $db);
 
 
-if (!$conn) {
-    die("Connection Failed" . mysqli_connect_error());
-}
-
-function filteration($data)
-{
-    foreach ($data as $key => $value) {
-        $data[$key] = trim($value);
-        $data[$key] = htmlspecialchars($value);
     }
+    
 
     return $data;
 }

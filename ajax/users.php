@@ -1,6 +1,4 @@
-<!-- <?php
-require('../admin/database/db_config.php');
-require('../admin/shares/essentials.php');
+
 adminLogin();
 
 
@@ -8,11 +6,10 @@ if(isset($_POST['get_user']))
 {
     $res = selectAll('user_cred');
     $i=1;
-    $path = USERS_IMG_PATH;
 
     $data = "";
 
-    white($row = mysqli_fetch_assoc($res))
+    while($row = mysqli_fetch_assoc($res))
     {
         $del_btn ="<button type='button' onclick='remove_user($row[id])' class='btn btn-danger shadow-none'>
         <i class='bi bi-check-lg'></i></span>
@@ -44,17 +41,13 @@ if(isset($_POST['get_user']))
              <tr>
                 <td>$i</td>
                 <td>
-                <img src='$path$row[profile]' width='55px'>
                 <br>
                 $row [name]
                 </td>
                 <td>$row [email]</td>
                 <td>$row [phonenum]</td>
-                <td>$row [address] | $row[pincode] </td>
+                <td>$row [address] </td>
                 <td>$row [dob]</td>
-                <td>$verified</td>
-                <td>$status</td>
-                 <td>$date</td>
                 <td>$del_btn</td>
 
             </tr>
@@ -103,7 +96,7 @@ if(isset($_POST['get_user']))
 
     if (isset($_POST['search_user'])) {
         // Lọc dữ liệu đầu vào để tránh SQL Injection
-        $frm_data = filtration($_POST);
+        $frm_data = filteration($_POST);
         
         // Câu truy vấn tìm kiếm người dùng theo tên
         $query = "SELECT * FROM `user_cred` WHERE `name` LIKE ?";
@@ -111,8 +104,6 @@ if(isset($_POST['get_user']))
         // Thực thi truy vấn với tham số đã lọc
         $res = select($query, ["%{$frm_data['name']}%"], 's');
         
-        // Định nghĩa đường dẫn ảnh người dùng
-        $path = USERS_IMG_PATH;
         $data = "";
         
         // Duyệt qua từng kết quả trả về
@@ -141,5 +132,3 @@ if(isset($_POST['get_user']))
 
 }
 
-
-?>  -->

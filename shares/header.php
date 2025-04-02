@@ -1,3 +1,4 @@
+
 <div class="container-fluid position-relative p-0">
     <nav id="nav-bar" class="navbar navbar-expand-lg navbar-light bg-light shadow-sm fixed-top">
         <div class="container">
@@ -20,25 +21,8 @@
                 </ul>
                 <div class="ms-3">
                     <?php
-                    if (isset($_SESSION['login']) && $_SESSION['login'] == true) {
-                        echo <<<data
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-                                        
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-lg-end">
-                                        <li><button class="dropdown-item" type="button" href="profile.php" >Profile</button></li>
-                                        <li><button class="dropdown-item" type="button" href="booking.php" >Booking</button></li>
-                                        <li><button class="dropdown-item" type="button" href="logout.php" >Logout</button></li>
-                                    </ul>
-                                    </div>
-                            data;
-                    }
-                    ?>
-                    <button class="btn btn-primary rounded-3 me-2" data-bs-toggle="modal"
-                        data-bs-target="#loginModal">Login</button>
-                    <button class="btn btn-primary rounded-3" data-bs-toggle="modal"
-                        data-bs-target="#registerModal">Register</button>
+        <button class="btn btn-primary rounded-3" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
+
                 </div>
             </div>
         </div>
@@ -60,11 +44,11 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label">Email address</label>
-                            <input type="email" class="form-control shadow-none">
+                            <input name="email_mob" type="email" class="form-control shadow-none">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Password</label>
-                            <input type="password" class="form-control shadow-none">
+                            <input name="pass" type="password" class="form-control shadow-none">
                         </div>
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <button type="submit" class="btn btn-primary rounded-3">Login</button>
