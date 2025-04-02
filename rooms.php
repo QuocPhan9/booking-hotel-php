@@ -113,8 +113,6 @@
 
                 <div class="col-lg-9 col-md-12 px-4">
                     <?php
-                        include 'admin/database/db_config.php';
-                        include 'admin/shares/essentials.php';
 
                         $room_res = select( "SELECT * FROM `rooms` WHERE `status` =? AND `removed` =?", [1, 0], 'ii');
                         while($room_data = mysqli_fetch_assoc($room_res)) {
