@@ -22,7 +22,7 @@
                         <div class="table-responsive">
                             <table class="table table-hover border">
                                 <thead>
-                                    <tr class="bg-dark text-light">
+                                    <tr class="bg-success text-light">
                                         <th scope="col">#</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Email</th>
