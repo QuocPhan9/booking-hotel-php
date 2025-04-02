@@ -1,6 +1,4 @@
-<?php
-session_start();  // Đảm bảo session_start() ở đầu file PHP
-?>
+
 <div class="container-fluid position-relative p-0">
     <nav id="nav-bar" class="navbar navbar-expand-lg navbar-light bg-light shadow-sm fixed-top">
         <div class="container">
@@ -9,7 +7,8 @@ session_start();  // Đảm bảo session_start() ở đầu file PHP
                     <i class="fa fa-map-marker-alt me-2"></i>LETMECOOK
                 </h1>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavSupportedContent">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNavSupportedContent">
                 <span class="fa fa-bars"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavSupportedContent">
@@ -22,17 +21,16 @@ session_start();  // Đảm bảo session_start() ở đầu file PHP
                 </ul>
                 <div class="ms-3">
                     <?php
-                        print_r($_SESSION);  // Kiểm tra biến $_SESSION
-                    ?>
-                    <button class="btn btn-primary rounded-3 me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
-                    <button class="btn btn-primary rounded-3" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
+        <button class="btn btn-primary rounded-3" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
+
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Modal -->
-    <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <form id="login_form">
@@ -40,7 +38,8 @@ session_start();  // Đảm bảo session_start() ở đầu file PHP
                         <h1 class="modal-title d-flex align-items-center fs-5" id="staticBackdropLabel">
                             <i class="bi bi-person-circle fs-3 me-2"></i>User Login
                         </h1>
-                        <button type="reset" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="reset" class="btn-close shadow-none" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
@@ -53,7 +52,8 @@ session_start();  // Đảm bảo session_start() ở đầu file PHP
                         </div>
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <button type="submit" class="btn btn-primary rounded-3">Login</button>
-                            <a href="javascript: void(0)" class="text-secondary text-decoration-none">Forgot Password?</a>
+                            <a href="javascript: void(0)" class="text-secondary text-decoration-none">Forgot
+                                Password?</a>
                         </div>
                     </div>
                 </form>
@@ -61,7 +61,8 @@ session_start();  // Đảm bảo session_start() ở đầu file PHP
         </div>
     </div>
 
-    <div class="modal fade" id="registerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="registerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <form id="register_form">
@@ -69,11 +70,13 @@ session_start();  // Đảm bảo session_start() ở đầu file PHP
                         <h1 class="modal-title d-flex align-items-center fs-5" id="staticBackdropLabel">
                             <i class="bi bi-person-lines-fill fs-3 me-2"></i>User Registration
                         </h1>
-                        <button type="reset" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="reset" class="btn-close shadow-none" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <span class="badge rounded-pill bg-light text-dark mb-3 text-wrap lh-base">
-                            Note: Your details must match with ID (card, passport, driving license, etc.) that will be required during check-in.
+                            Note: Your details must match with ID (card, passport, driving license, etc.) that will be
+                            required during check-in.
                         </span>
                         <div class="container-fluid">
                             <div class="row">
@@ -121,14 +124,11 @@ session_start();  // Đảm bảo session_start() ở đầu file PHP
         <div class="container py-5">
             <div class="row justify-content-center py-5">
                 <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
-                    <h1
-                        class="display-3 text-white mb-3 animated slideInDown">Enjoy
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">Enjoy
                         Your Vacation With Us</h1>
-                    <div
-                        class="position-relative w-75 mx-auto animated slideInDown">
-                        <input
-                            class="form-control border-0 rounded-pill w-100 py-3 ps-4 pe-5"
-                            type="text" placeholder="Eg: Thailand">
+                    <div class="position-relative w-75 mx-auto animated slideInDown">
+                        <input class="form-control border-0 rounded-pill w-100 py-3 ps-4 pe-5" type="text"
+                            placeholder="Eg: Thailand">
                         <button type="button"
                             class="btn btn-primary rounded-pill py-2 px-4 position-absolute top-0 end-0 me-2"
                             style="margin-top: 7px;">Search</button>

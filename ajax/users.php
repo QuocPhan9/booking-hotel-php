@@ -1,6 +1,4 @@
-<?php
-require('/admin/database/db_config.php');
-require('/admin/shares/essentials.php');
+
 adminLogin();
 
 
@@ -134,4 +132,3 @@ if(isset($_POST['get_user']))
 
 }
 
-?> 

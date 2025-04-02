@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Tourist - Travel Agency HTML Template</title>
+    <title>Tourist - Room Details</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content name="keywords">
     <meta content name="description">
@@ -34,7 +34,24 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 
-<body>
+<>
+    <?php
+    include 'admin/database/db_config.php';
+    include 'admin/shares/essentials.php';
+
+    if (!isset($_GET['id'])) {
+        redirect('rooms.php');
+    }
+
+    $data = filteration($_GET);
+
+    $room_res = select("SELECT * FROM `rooms` WHERE `id` =? AND `status` =? AND `removed` =?", [$data['id'], 1, 0], 'iii');
+    if (mysqli_num_rows($room_res) == 0) {
+        redirect('rooms.php');
+    }
+    $room_data = mysqli_fetch_assoc($room_res);
+    ?>
+
     <!-- Spinner Start -->
     <div id="spinner"
         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -53,67 +70,67 @@
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                 <h6 class="section-title bg-white text-center text-primary px-3">Rooms</h6>
-                <h1 class="mb-5">Awesome Rooms</h1>
+                <h1 class="mb-5"><?php echo $room_data['name'] ?></h1>
             </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-2 mb-lg-0 mb-4 px-0">
-                    <nav class="navbar navbar-expand-lg navbar-white bg-white shadow mb-3 rounded">
-                        <div class="container-fluid flex-lg-column align-items-stretch">
-                            <h4 class="mt-2">FILTERS</h4>
-                            <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#filterDropdown">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse flex-column align-items-stretch mt-2"
-                                id="filterDropdown">
-                                <div class="border bg-light p-3 rounded mb-3">
-                                    <h5 class="mb-3" style="font-size: 18px;">CHECK AVAILABILITY</h5>
-                                    <label class="form-label">Check-in</label>
-                                    <input type="date" class="form-control shadow-none">
-                                    <label class="form-label">Check-out</label>
-                                    <input type="date" class="form-control shadow-none">
-                                </div>
-                                <div class="border bg-light p-3 rounded mb-3">
-                                    <h5 class="mb-3" style="font-size: 18px;">FACILITIES</h5>
-                                    <div class="mb-2">
-                                        <input type="checkbox" id="f1" class="form-check-input shadow-none me-1">
-                                        <label class="form-check-label" for="f1">Facility one</label>
-                                    </div>
-                                    <div class="mb-2">
-                                        <input type="checkbox" id="f2" class="form-check-input shadow-none me-1">
-                                        <label class="form-check-label" for="f2">Facility two</label>
-                                    </div>
-                                    <div class="mb-2">
-                                        <input type="checkbox" id="f3" class="form-check-input shadow-none me-1">
-                                        <label class="form-check-label" for="f3">Facility three</label>
-                                    </div>
-                                </div>
-                                <div class="border bg-light p-3 rounded mb-3">
-                                    <h5 class="mb-3" style="font-size: 18px;">GUESTS</h5>
-                                    <div class="d-flex">
-                                        <div class="me-3">
-                                            <label class="form-label">Adults</label>
-                                            <input type="number" class="form-control shadow-none">
+            <div class="col-lg-7 col-md-12 px-4">
+                <div id="roomCarousel" class="carousel slide">
+                    <div class="carousel-inner">
+                        <?php
+                        $room_img = ROOMS_IMG_PATH . "thumbnail.jpg";
+                        $img_q = mysqli_query(
+                            $conn,
+                            "SELECT * FROM `room_images` WHERE `room_id` = '$room_data[id]'"
+                        );
+                        if (mysqli_num_rows($img_q) > 0) {
+                            $active_class = 'active';
+                            while ($img_res = mysqli_fetch_assoc($img_q)) {
+                                echo "
+                                        <div class='carousel-item $active_class'>
+                                            <img src='" . ROOMS_IMG_PATH . $img_res['image'] . "' class='d-block w-100' alt='...'>
                                         </div>
-                                        <div class="">
-                                            <label class="form-label">Chilren</label>
-                                            <input type="number" class="form-control shadow-none">
-                                        </div>
+                                    ";
+                                $active_class = '';
+                            }
+                        } else {
+                            echo "
+                                    <div class='carousel-item active'>
+                                        <img src='$room_img' class='d-block w-100' alt='...'>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </nav>
+                                ";
+                        }
+                        ?>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#roomCarousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#roomCarousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
+            </div>
+            <div class="col-lg-5 col-md-12 px-4">
+                <div class="card mb-4 border-0 shadow-sm rounded-3">
+                    <div class="card-body">
+                        <?php
+                        echo <<<price
+                                <h6 class="mb-4">$$room_data[price] per night</h6>
+                            price;
+                        echo <<<rating
+                                <div class="rating mb-4">
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                </div>
+                            rating;
 
-                <div class="col-lg-9 col-md-12 px-4">
-                    <?php
-                    require_once 'admin/database/db_config.php';
-                    require_once 'admin/shares/essentials.php';
-
-
-                    $room_res = select("SELECT * FROM `rooms` WHERE `status` =? AND `removed` =?", [1, 0], 'ii');
-                    while ($room_data = mysqli_fetch_assoc($room_res)) {
+                        echo <<<area
+                                <h6 class="mb-4">$room_data[area] square meters</h6>
+                            area;
 
                         $fea_q = mysqli_query(
                             $conn,
@@ -127,6 +144,12 @@
                                     $fea_row[name]
                                 </span>";
                         }
+                        echo <<<features
+                                <h6 class="mb-4">Features</h6>
+                                <div class="d-flex flex-wrap mb-4">
+                                    $features_data
+                                </div>
+                            features;
 
                         $fac_q = mysqli_query(
                             $conn,
@@ -140,53 +163,41 @@
                                     $fac_row[name]
                                 </span>";
                         }
-
-                        $room_thumb = ROOMS_IMG_PATH . "thumbnail.jpg";
-                        $thumb_q = mysqli_query(
-                            $conn,
-                            "SELECT * FROM `room_images` WHERE `room_id` = '$room_data[id]' AND `thumb` = '1'"
-                        );
-                        if (mysqli_num_rows($thumb_q) > 0) {
-                            $thumb_res = mysqli_fetch_assoc($thumb_q);
-                            $room_thumb = ROOMS_IMG_PATH . $thumb_res['image'];
-                        }
-
-                        echo <<<data
-                                <div class="card mb-4 border-0 shadow">
-                                    <div class="row g-0 p-3 align-items-center">
-                                        <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
-                                            <img src="$room_thumb" class="img-fluid rounded" alt="...">
-                                        </div>
-                                        <div class="col-md-5 px-lg-3 px-md-3 px-0">
-                                            <h5>$room_data[name]</h5>
-                                            <div class="features mb-4">
-                                                <h6 class="mb-1">Features</h6>
-                                                $features_data
-                                            </div>
-                                            <div class="facilities mb-3">
-                                                <h6 class="mb-3">Facilities</h6>
-                                                $facilities_data
-                                            </div>
-                                            <div class="guests mb-3">
-                                                <h6 class="mb-1">Guests</h6>
-                                                <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                                    $room_data[adult] Adults
-                                                </span>
-                                                <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                                    $room_data[children] Children
-                                                </span>
-                                            </div>
-                                        </div>  
-                                        <div class="col-md-2 mt-lg-0 mt-md-0 mt-4 text-center">
-                                            <h6 class="mb-4">$$room_data[price] per night</h6>
-                                            <a href="confirm_booking.php.php?id=$room_data[id]" class="btn btn-sm w-100 text-white bg-primary shadow-none mb-2">Book now</a>
-                                            <a href="room_details.php?id=$room_data[id]" class="btn btn-sm w-100 btn-outline-dark shadow-none">More details</a>
-                                        </div>
-                                    </div>
+                        echo <<<facilities
+                                <h6 class="mb-4">Facilities</h6>
+                                <div class="d-flex flex-wrap mb-4">
+                                    $facilities_data
                                 </div>
-                            data;
-                    }
-                    ?>
+                            facilities;
+
+                        echo <<<guests
+                                <div class="guests mb-3">
+                                    <h6 class="mb-1">Guests</h6>
+                                    <span class="badge rounded-pill bg-light text-dark text-wrap">
+                                        $room_data[adult] Adults
+                                    </span>
+                                    <span class="badge rounded-pill bg-light text-dark text-wrap">
+                                        $room_data[children] Children
+                                    </span>
+                                </div>
+                            guests;
+
+                        echo <<<book
+                                <a href="#" class="btn btn-sm w-100 text-white bg-primary shadow-none mb-2">Book now</a>
+                            book;
+                        ?>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 px-4">
+                <div class="card mb-4 border-0 shadow-sm rounded-3">
+                    <div class="card-body">
+                        <h6 class="mb-4">Description</h6>
+                        <p><?php echo $room_data['description'] ?></p>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="mb-4">Reviews & Ratings</h6>
+                    </div>
                 </div>
             </div>
         </div>
@@ -348,6 +359,6 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-</body>
+    </body>
 
 </html>
