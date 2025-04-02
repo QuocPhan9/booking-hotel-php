@@ -14,7 +14,8 @@ session_start();
                     <i class="fa fa-map-marker-alt me-2"></i>LETMECOOK
                 </h1>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavSupportedContent">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNavSupportedContent">
                 <span class="fa fa-bars"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavSupportedContent">
@@ -35,7 +36,7 @@ session_start();
                                             </button>
                                             <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item" href="profile.php">Profile</a></li>
-                                                <li><a class="dropdown-item" href="booking.php">Booking</a></li>
+                                                <li><a class="dropdown-item" href="list_booked_room.php">Booking</a></li>
                                                 <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                                             </ul>
                                         </div>
@@ -54,7 +55,8 @@ session_start();
     </nav>
 
     <!-- Modal -->
-    <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <form id="login_form">
@@ -62,7 +64,8 @@ session_start();
                         <h1 class="modal-title d-flex align-items-center fs-5" id="staticBackdropLabel">
                             <i class="bi bi-person-circle fs-3 me-2"></i>User Login
                         </h1>
-                        <button type="reset" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="reset" class="btn-close shadow-none" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
@@ -89,7 +92,8 @@ session_start();
         </div>
     </div>
 
-    <div class="modal fade" id="registerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="registerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <form id="register_form">
@@ -97,11 +101,13 @@ session_start();
                         <h1 class="modal-title d-flex align-items-center fs-5" id="staticBackdropLabel">
                             <i class="bi bi-person-lines-fill fs-3 me-2"></i>User Registration
                         </h1>
-                        <button type="reset" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="reset" class="btn-close shadow-none" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <span class="badge rounded-pill bg-light text-dark mb-3 text-wrap lh-base">
-                            Note: Your details must match with ID (card, passport, driving license, etc.) that will be required during check-in.
+                            Note: Your details must match with ID (card, passport, driving license, etc.) that will be
+                            required during check-in.
                         </span>
                         <div class="container-fluid">
                             <div class="row">

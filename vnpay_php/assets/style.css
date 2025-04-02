@@ -1,0 +1,339 @@
+:root {
+    --vnpay-primary: #0052B4;
+    --vnpay-secondary: #E02020;
+    --vnpay-accent: #00A1E4;
+    --vnpay-light: #f8f9fa;
+    --vnpay-gray: #6c757d;
+    --vnpay-dark: #212529;
+}
+
+body {
+    background-color: #f0f2f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+.vnpay-container {
+    max-width: 750px;
+    margin: 30px auto;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.vnpay-header {
+    background: linear-gradient(135deg, var(--vnpay-primary), var(--vnpay-accent));
+    padding: 24px;
+    color: white;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.vnpay-logo {
+    height: 40px;
+}
+
+.vnpay-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.vnpay-content {
+    padding: 30px;
+}
+
+.form-title {
+    color: var(--vnpay-primary);
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.payment-section {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 24px;
+}
+
+.payment-method-title {
+    color: var(--vnpay-dark);
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.payment-option {
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+.payment-option:hover {
+    background-color: #e9ecef;
+}
+
+.payment-option input[type="radio"] {
+    margin-right: 10px;
+    accent-color: var(--vnpay-primary);
+    width: 18px;
+    height: 18px;
+}
+
+.payment-option label {
+    margin-bottom: 0;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+}
+
+.payment-icon {
+    width: 30px;
+    display: inline-flex;
+    justify-content: center;
+    margin-right: 10px;
+    color: var(--vnpay-primary);
+}
+
+.form-control:focus {
+    border-color: var(--vnpay-accent);
+    box-shadow: 0 0 0 0.25rem rgba(0, 161, 228, 0.25);
+}
+
+.amount-group {
+    position: relative;
+}
+
+.amount-group .form-control {
+    padding-left: 60px;
+    font-size: 18px;
+    height: 50px;
+    border-radius: 8px;
+}
+
+.currency-prefix {
+    position: absolute;
+    left: 15px;
+    top: 39px;
+    font-weight: 600;
+    color: var(--vnpay-gray);
+}
+
+.submit-btn {
+    background: var(--vnpay-primary);
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 12px 30px;
+    border-radius: 8px;
+    border: none;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: #004299;
+    box-shadow: 0 4px 12px rgba(0, 82, 180, 0.3);
+}
+
+.submit-btn i {
+    margin-right: 8px;
+}
+
+.language-selector {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.language-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.language-flag {
+    width: 22px;
+    height: 16px;
+    margin-right: 8px;
+    border-radius: 2px;
+    object-fit: cover;
+}
+
+.vnpay-footer {
+    padding: 16px 30px;
+    background-color: #f8f9fa;
+    color: #6c757d;
+    font-size: 14px;
+    border-top: 1px solid #eaeaea;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.secure-badge {
+    display: flex;
+    align-items: center;
+    color: #495057;
+    font-size: 13px;
+}
+
+.secure-badge i {
+    color: #28a745;
+    margin-right: 6px;
+}
+
+.method-description {
+    font-size: 13px;
+    color: #6c757d;
+    margin-top: 4px;
+    margin-left: 28px;
+}
+
+@media (max-width: 768px) {
+    .vnpay-container {
+        margin: 15px;
+        border-radius: 12px;
+    }
+
+    .vnpay-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .vnpay-logo {
+        margin-bottom: 12px;
+    }
+}
+
+
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.payment-container {
+    max-width: 800px;
+    margin: 40px auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.payment-header {
+    background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+    color: white;
+    padding: 20px;
+    position: relative;
+}
+
+.payment-logo {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    height: 40px;
+}
+
+.payment-status {
+    margin-top: -30px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.status-card {
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    margin: 0 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.success-card {
+    background-color: #d1e7dd;
+    border-left: 5px solid #198754;
+    color: #0f5132;
+}
+
+.error-card {
+    background-color: #f8d7da;
+    border-left: 5px solid #dc3545;
+    color: #842029;
+}
+
+.payment-body {
+    background-color: white;
+    padding: 30px;
+}
+
+.info-group {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.info-group:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    font-weight: 600;
+    color: #495057;
+}
+
+.info-value {
+    color: #212529;
+}
+
+.payment-footer {
+    background-color: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #eee;
+}
+
+.back-button {
+    padding: 10px 30px;
+    font-weight: 500;
+}
+
+.icon-circle {
+    background-color: white;
+    color: #0d6efd;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 40px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.payment-amount {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 20px 0;
+    color: #0d6efd;
+}
+
+.debug-section {
+    margin-top: 30px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    font-family: monospace;
+    font-size: 14px;
+}

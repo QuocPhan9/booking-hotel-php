@@ -1,6 +1,4 @@
-<div
-    class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn"
-    data-wow-delay="0.1s">
+<div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
     <div class="container py-5">
         <div class="row g-5">
             <?php
@@ -11,23 +9,13 @@
             <div class="col-lg-8 col-md-6">
                 <h4 class="text-white mb-3">Contact</h4>
                 <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i><?php echo $contact_r['address'] ?></p>
-                <p class="mb-2"><i
-                        class="fa fa-phone-alt me-3"></i>+<?php echo $contact_r['phone'] ?></p>
-                <p class="mb-2"><i
-                        class="fa fa-envelope me-3"></i><?php echo $contact_r['email'] ?></p>
+                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+<?php echo $contact_r['phone'] ?></p>
+                <p class="mb-2"><i class="fa fa-envelope me-3"></i><?php echo $contact_r['email'] ?></p>
                 <div class="d-flex pt-2">
-                    <a class="btn btn-outline-light btn-social"
-                        href="#"><i
-                            class="fab fa-twitter"></i></a>
-                    <a class="btn btn-outline-light btn-social"
-                        href="#"><i
-                            class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-outline-light btn-social"
-                        href="#"><i
-                            class="fab fa-youtube"></i></a>
-                    <a class="btn btn-outline-light btn-social"
-                        href="#"><i
-                            class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-youtube"></i></a>
+                    <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
             <div class="col-lg-2 col-md-6">
@@ -93,8 +81,6 @@
         registerForm.addEventListener("submit", function(e) {
             e.preventDefault(); // Ngăn chặn form gửi đi mặc định
 
-            let formData = new FormData(registerForm); // Lấy dữ liệu từ form
-            formData.append("register", ""); // Thêm key để xác định đăng ký
 
             let xhr = new XMLHttpRequest();
 
@@ -154,14 +140,7 @@
     //     e.preventDefault();
     //     let data = new FormData();
 
-    //     data.append('name', register_form.elements['name'].value);
-    //     data.append('email', register_form.elements['email'].value);
-    //     data.append('phonenum', register_form.elements['phonenum'].value);
-    //     data.append('address', register_form.elements['address'].value);
-    //     data.append('dob', register_form.elements['dob'].value);
-    //     data.append('pass', register_form.elements['pass'].value);
-    //     data.append('cpass', register_form.elements['cpass'].value);
-    //     data.append('register', '');
+
 
     //     var Model = document.getElementById('registerModal');
     //     var modal = bootstrap.Modal.getInstance(Model);
@@ -311,6 +290,20 @@
     });
 
     // let forgot_form = document.getElementById('forgotPasswordModal');
+    function checkLoginToBook(isLoggedIn, roomId) {
+        if (!isLoggedIn) {
+            var loginModal = new bootstrap.Modal(document.getElementById("loginModal"));
+            loginModal.show();
+            alert('error', 'Please login to booking');
+            console.log('chưa login');
+        } else {
+            window.location.href = `confirm_booking.php?id=${roomId}`;
+        }
+    }
+    // setActive();
+
+
+    // let forgot_form = document.getElementById('forgot_form');
 
     // forgot_form.addEventListener('submit', function(e) {
     //     e.preventDefault();
