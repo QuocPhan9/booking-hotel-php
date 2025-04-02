@@ -67,118 +67,191 @@
         document.getElementsByClassName('custom-alert')[0].remove();
     }
 
-    function setActive() {
-        let navbar = document.getElementById('dashboard-menu');
-        let a_tags = navbar.getElementsByTagName('a');
+    // function setActive() {
+    //     let navbar = document.getElementById('dashboard-menu');
+    //     let a_tags = navbar.getElementsByTagName('a');
 
-        for (i = 0; i < a_tags.length; i++) {
-            let file = a_tags[i].href.split('/').pop();
-            let file_name = file.split('.')[0];
+    //     for (i = 0; i < a_tags.length; i++) {
+    //         let file = a_tags[i].href.split('/').pop();
+    //         let file_name = file.split('.')[0];
 
-            if (document.location.href.indexOf(file) != -1) {
-                a_tags[i].classList.add('active');
-            }
-        }
-    }
+    //         if (document.location.href.indexOf(file) != -1) {
+    //             a_tags[i].classList.add('active');
+    //         }
+    //     }
+    // }
 
-    let register_form = document.getElementById('register_form');
+    document.addEventListener("DOMContentLoaded", function() {
+        let registerForm = document.getElementById("register_form");
 
-    document.getElementById("register_form").addEventListener("submit", function(e) {
-        e.preventDefault(); // Ngăn chặn reload trang
+        registerForm.addEventListener("submit", function(e) {
+            e.preventDefault(); // Ngăn chặn form gửi đi mặc định
 
-        let formData = new FormData(this);
+            let formData = new FormData(registerForm); // Lấy dữ liệu từ form
+            formData.append("register", ""); // Thêm key để xác định đăng ký
 
-        fetch("/booking-hotel-php/shares/header.php", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                console.log(data); // Xem kết quả server trả về
+            let xhr = new XMLHttpRequest();
 
-                if (data.trim() === "1") {
-                    alert("Đăng ký thành công!");
-                    location.reload(); // Reload trang sau khi đăng ký thành công
+
+            xhr.onload = function() {
+                let response = this.responseText.trim(); // Lấy phản hồi từ server
+
+                if (response === "pass_mismatch") {
+                    alert("Mật khẩu không khớp!");
+                } else if (response === "email_already") {
+                    alert("Email đã tồn tại!");
+                } else if (response === "phonenum_already") {
+                    alert("Số điện thoại đã đăng ký!");
+                } else if (response === "mail_failed") {
+                    alert("Gửi email xác nhận thất bại!");
+                } else if (response === "ins_failed") {
+                    alert("Lỗi khi đăng ký!");
+                } else if (response === "1") {
+                    alert("Đăng ký thành công! Vui lòng kiểm tra email để xác nhận.");
+                    registerForm.reset(); // Xóa nội dung form sau khi đăng ký thành công
                 } else {
-                    alert("Lỗi: " + data);
+                    alert("Lỗi không xác định!");
                 }
-            })
-            .catch(error => console.error("Error:", error));
+            };
+
+            xhr.send(formData); // Gửi dữ liệu qua AJAX
+        });
+    });
+
+    // let register_form = document.getElementById('register_form');
+
+    // register_form.addEventListener('submit', function(e) {
+    //     e.preventDefault();
+    //     let data = new FormData();
+
+    //     data.append('name', register_form.elements['name'].value);
+    //     data.append('email', register_form.elements['email'].value);
+    //     data.append('phonenum', register_form.elements['phonenum'].value);
+    //     data.append('address', register_form.elements['address'].value);
+    //     data.append('dob', register_form.elements['dob'].value);
+    //     data.append('pass', register_form.elements['pass'].value);
+    //     data.append('cpass', register_form.elements['cpass'].value);
+    //     data.append('register', '');
+
+    //     var Model = document.getElementById('registerModal');
+    //     var modal = bootstrap.Modal.getInstance(Model);
+    //     modal.hide();
+
+    //     let xhr = new XMLHttpRequest();
+    //     xhr.open('POST', "ajax/login_regester.php", true);
+    //     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    //     xhr.onload = function() {
+    //         if (this.responseText == 'pass_mismatch') {
+    //             alert('error', 'Password Mismatch!');
+    //         } else if (this.responseText == 'email_already') {
+    //             alert('error', 'Email Already registered');
+    //         } else if (this.responseText == 'phonenum_already') {
+    //             alert('error', 'Phone Number Already Exists');
+    //         } else if (this.responseText == 'mail_failed') {
+    //             alert('error', 'Email Sending Failed');
+    //         } else if (this.responseText == 1) {
+    //             alert('success', 'Registration Successful. Confirmation link sent to email!');
+    //             register_form.reset();
+    //         }
+    //     }
+    //     console.log(data);
+    //     xhr.send(data);
+    // });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        let login_form = document.getElementById("login_form");
+
+        login_form.addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            let data = new FormData(login_form);
+            data.append("login", "1"); // Xác định là login
+            // data.append("email_mob", login_form.elements["email_mob"].value);
+            // data.append("pass", login_form.elements["pass"].value);
+
+            // Ẩn modal đăng nhập
+            let Model = document.getElementById("loginModal");
+            let modal = bootstrap.Modal.getInstance(Model);
+            modal.hide();
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "ajax/login_register.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            xhr.onload = function() {
+                let res = this.responseText.trim();
+
+                let msgBox = document.getElementById("login_message");
+                if (!msgBox) {
+                    msgBox = document.createElement("div");
+                    msgBox.id = "login_message";
+                    login_form.prepend(msgBox);
+                }
+                msgBox.style.color = "red";
+
+                switch (res) {
+                    case "inv_email_mob":
+                        msgBox.innerHTML = "Email hoặc số điện thoại không hợp lệ!";
+                        break;
+                    case "invalid_pass":
+                        msgBox.innerHTML = "Mật khẩu không chính xác!";
+                        break;
+                    case "1":
+                        msgBox.style.color = "green";
+                        msgBox.innerHTML = "Đăng nhập thành công!";
+                        setTimeout(() => window.location.reload(), 1000);
+                        break;
+                    default:
+                        msgBox.innerHTML = "Lỗi không xác định!";
+                }
+            };
+
+            xhr.onerror = function() {
+                alert("Lỗi kết nối! Vui lòng thử lại sau.");
+            };
+            console.log(data.toString());
+            xhr.send(data);
+        });
     });
 
 
-    let login_form = document.getElementById('login_form');
+    // let forgot_form = document.getElementById('forgot_form');
 
-    login_form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        let data = new FormData();
+    // forgot_form.addEventListener('submit', function(e) {
+    //     e.preventDefault();
+    //     let data = new FormData();
 
-        data.append('email_mob', login_form.elements['email_mob'].value);
-        data.append('pass', login_form.elements['pass'].value);
-        data.append('login', '');
-
-
-        var Model = document.getElementById('loginModal');
-        var modal = bootstrap.Modal.getInstance(Model);
-        modal.hide();
-
-        let xhr = new XMLHttpRequest();
-        xhr.open('POST', "ajax/login_regester.php", true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-        xhr.onload = function() {
-            if (this.responseText == 'inv_email_mob') {
-                alert('error', 'Invalid Email or Mobile Number!');
-            } else if (this.responseText == 'not_verified') {
-                alert('error', 'Email is not verified');
-            } else if (this.responseText == 'inactive') {
-                alert('error', 'Account Suspended! Please contact admin');
-            } else if (this.responseText == 'invalid_pass') {
-                alert('error', 'Incorrect Password');
-            } else {
-                window.location = window.location.pathname;
-            }
-        }
-
-        xhr.send(data);
-    });
-
-    let forgot_form = document.getElementById('forgot_form');
-
-    forgot_form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        let data = new FormData();
-
-        data.append('email', forgot_form.elements['email'].value);
-        data.append('forgot_pass', '');
+    //     data.append('email', forgot_form.elements['email'].value);
+    //     data.append('forgot_pass', '');
 
 
-        var Model = document.getElementById('forgotModal');
-        var modal = bootstrap.Modal.getInstance(Model);
-        modal.hide();
+    //     var Model = document.getElementById('forgotModal');
+    //     var modal = bootstrap.Modal.getInstance(Model);
+    //     modal.hide();
 
-        let xhr = new XMLHttpRequest();
-        xhr.open('POST', "ajax/login_regester.php", true);
+    //     let xhr = new XMLHttpRequest();
+    //     xhr.open('POST', "ajax/login_regester.php", true);
 
-        xhr.onload = function() {
-            if (this.responseText == 'inv_email') {
-                alert('error', 'Invalid Email !');
-            } else if (this.responseText == 'not_verified') {
-                alert('error', 'Email is not verified! Please contact Admin');
-            } else if (this.responseText == 'inactive') {
-                alert('error', 'Account Suspended! Please contact admin');
-            } else if (this.responseText == 'mail_failed') {
-                alert('error', 'Cannot send email. Sever down!');
-            } else if (this.responseText == 'mail_failed') {
-                alert('error', 'Account recover failed. Sever down!');
-            } else {
-                alert('success', 'Reset link sent to email!');
-                forgot_form.reset();
-            }
-        }
+    //     xhr.onload = function() {
+    //         if (this.responseText == 'inv_email') {
+    //             alert('error', 'Invalid Email !');
+    //         } else if (this.responseText == 'not_verified') {
+    //             alert('error', 'Email is not verified! Please contact Admin');
+    //         } else if (this.responseText == 'inactive') {
+    //             alert('error', 'Account Suspended! Please contact admin');
+    //         } else if (this.responseText == 'mail_failed') {
+    //             alert('error', 'Cannot send email. Sever down!');
+    //         } else if (this.responseText == 'mail_failed') {
+    //             alert('error', 'Account recover failed. Sever down!');
+    //         } else {
+    //             alert('success', 'Reset link sent to email!');
+    //             forgot_form.reset();
+    //         }
+    //     }
 
-        xhr.send(data);
-    });
+    //     xhr.send(data);
+    // });
 
-    setActive();
+    //setActive();
 </script>

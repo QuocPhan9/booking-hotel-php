@@ -1,8 +1,6 @@
 <?php
-require('admin/database/db_config.php');
-require('admin/shares/essentials.php');
+session_start();  // Đảm bảo session_start() ở đầu file PHP
 ?>
-
 <div class="container-fluid position-relative p-0">
     <nav id="nav-bar" class="navbar navbar-expand-lg navbar-light bg-light shadow-sm fixed-top">
         <div class="container">
@@ -23,6 +21,9 @@ require('admin/shares/essentials.php');
                     <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
                 </ul>
                 <div class="ms-3">
+                    <?php
+                        print_r($_SESSION);  // Kiểm tra biến $_SESSION
+                    ?>
                     <button class="btn btn-primary rounded-3 me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
                     <button class="btn btn-primary rounded-3" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
                 </div>
@@ -44,11 +45,11 @@ require('admin/shares/essentials.php');
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label">Email address</label>
-                            <input type="email" class="form-control shadow-none">
+                            <input name="email_mob" type="email" class="form-control shadow-none">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Password</label>
-                            <input type="password" class="form-control shadow-none">
+                            <input name="pass" type="password" class="form-control shadow-none">
                         </div>
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <button type="submit" class="btn btn-primary rounded-3">Login</button>
@@ -78,31 +79,31 @@ require('admin/shares/essentials.php');
                             <div class="row">
                                 <div class="col-md-6 ps-0 mb-3">
                                     <label class="form-label">Name</label>
-                                    <input name="name register" type="text" class="form-control shadow-none">
+                                    <input name="name" type="text" class="form-control shadow-none">
                                 </div>
                                 <div class="col-md-6 ps-0 mb-3">
                                     <label class="form-label">Email</label>
-                                    <input name="email register" type="email" class="form-control shadow-none">
+                                    <input name="email" type="email" class="form-control shadow-none">
                                 </div>
                                 <div class="col-md-6 ps-0 mb-3">
                                     <label class="form-label">Phone Number</label>
-                                    <input name="phonenum register" type="number" class="form-control shadow-none">
+                                    <input name="phonenum" type="number" class="form-control shadow-none">
                                 </div>
                                 <div class="col-md-6 ps-0 mb-3">
                                     <label class="form-label">Date of birth</label>
-                                    <input name="dob register" type="date" class="form-control shadow-none">
+                                    <input name="dob" type="date" class="form-control shadow-none">
                                 </div>
                                 <div class="ps-0 mb-3">
                                     <label class="form-label">Address</label>
-                                    <textarea name="address register" rows="1" class="form-control shadow-none"></textarea>
+                                    <textarea name="address" rows="1" class="form-control shadow-none"></textarea>
                                 </div>
                                 <div class="col-md-6 ps-0 mb-3">
                                     <label class="form-label">Password</label>
-                                    <input name="pass register" type="password" class="form-control shadow-none">
+                                    <input name="pass" type="password" class="form-control shadow-none">
                                 </div>
                                 <div class="col-md-6 ps-0 mb-3">
                                     <label class="form-label">Confirm Password</label>
-                                    <input name="cpass register" type="password" class="form-control shadow-none">
+                                    <input name="cpass" type="password" class="form-control shadow-none">
                                 </div>
                             </div>
                         </div>

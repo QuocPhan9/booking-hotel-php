@@ -12,13 +12,14 @@
     }
 
     function filteration($data) {
-        foreach($data as $key => $value) {
-            $data[$key] = trim($value);
-            $data[$key] = htmlspecialchars($value);
+        foreach ($data as $key => $value) {
+            $data[$key] = trim($value); // Xóa khoảng trắng đầu/cuối
+            $data[$key] = stripslashes($value); // Loại bỏ ký tự escape
+            $data[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8'); // Chống XSS
         }
-
         return $data;
     }
+    
 
     function selectAll($table) {
         $conn = $GLOBALS['conn'];
