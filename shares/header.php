@@ -1,8 +1,3 @@
-<?php
-require('admin/database/db_config.php');
-require('admin/shares/essentials.php');
-?>
-
 <div class="container-fluid position-relative p-0">
     <nav id="nav-bar" class="navbar navbar-expand-lg navbar-light bg-light shadow-sm fixed-top">
         <div class="container">
@@ -11,7 +6,8 @@ require('admin/shares/essentials.php');
                     <i class="fa fa-map-marker-alt me-2"></i>LETMECOOK
                 </h1>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavSupportedContent">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNavSupportedContent">
                 <span class="fa fa-bars"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavSupportedContent">
@@ -23,15 +19,34 @@ require('admin/shares/essentials.php');
                     <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
                 </ul>
                 <div class="ms-3">
-                    <button class="btn btn-primary rounded-3 me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
-                    <button class="btn btn-primary rounded-3" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
+                    <?php
+                    if (isset($_SESSION['login']) && $_SESSION['login'] == true) {
+                        echo <<<data
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                        
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-lg-end">
+                                        <li><button class="dropdown-item" type="button" href="profile.php" >Profile</button></li>
+                                        <li><button class="dropdown-item" type="button" href="booking.php" >Booking</button></li>
+                                        <li><button class="dropdown-item" type="button" href="logout.php" >Logout</button></li>
+                                    </ul>
+                                    </div>
+                            data;
+                    }
+                    ?>
+                    <button class="btn btn-primary rounded-3 me-2" data-bs-toggle="modal"
+                        data-bs-target="#loginModal">Login</button>
+                    <button class="btn btn-primary rounded-3" data-bs-toggle="modal"
+                        data-bs-target="#registerModal">Register</button>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Modal -->
-    <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <form id="login_form">
@@ -39,7 +54,8 @@ require('admin/shares/essentials.php');
                         <h1 class="modal-title d-flex align-items-center fs-5" id="staticBackdropLabel">
                             <i class="bi bi-person-circle fs-3 me-2"></i>User Login
                         </h1>
-                        <button type="reset" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="reset" class="btn-close shadow-none" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
@@ -52,7 +68,8 @@ require('admin/shares/essentials.php');
                         </div>
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <button type="submit" class="btn btn-primary rounded-3">Login</button>
-                            <a href="javascript: void(0)" class="text-secondary text-decoration-none">Forgot Password?</a>
+                            <a href="javascript: void(0)" class="text-secondary text-decoration-none">Forgot
+                                Password?</a>
                         </div>
                     </div>
                 </form>
@@ -60,7 +77,8 @@ require('admin/shares/essentials.php');
         </div>
     </div>
 
-    <div class="modal fade" id="registerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="registerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <form id="register_form">
@@ -68,41 +86,43 @@ require('admin/shares/essentials.php');
                         <h1 class="modal-title d-flex align-items-center fs-5" id="staticBackdropLabel">
                             <i class="bi bi-person-lines-fill fs-3 me-2"></i>User Registration
                         </h1>
-                        <button type="reset" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="reset" class="btn-close shadow-none" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <span class="badge rounded-pill bg-light text-dark mb-3 text-wrap lh-base">
-                            Note: Your details must match with ID (card, passport, driving license, etc.) that will be required during check-in.
+                            Note: Your details must match with ID (card, passport, driving license, etc.) that will be
+                            required during check-in.
                         </span>
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-6 ps-0 mb-3">
                                     <label class="form-label">Name</label>
-                                    <input name="name register" type="text" class="form-control shadow-none">
+                                    <input name="name" type="text" class="form-control shadow-none">
                                 </div>
                                 <div class="col-md-6 ps-0 mb-3">
                                     <label class="form-label">Email</label>
-                                    <input name="email register" type="email" class="form-control shadow-none">
+                                    <input name="email" type="email" class="form-control shadow-none">
                                 </div>
                                 <div class="col-md-6 ps-0 mb-3">
                                     <label class="form-label">Phone Number</label>
-                                    <input name="phonenum register" type="number" class="form-control shadow-none">
+                                    <input name="phonenum" type="number" class="form-control shadow-none">
                                 </div>
                                 <div class="col-md-6 ps-0 mb-3">
                                     <label class="form-label">Date of birth</label>
-                                    <input name="dob register" type="date" class="form-control shadow-none">
+                                    <input name="dob" type="date" class="form-control shadow-none">
                                 </div>
                                 <div class="ps-0 mb-3">
                                     <label class="form-label">Address</label>
-                                    <textarea name="address register" rows="1" class="form-control shadow-none"></textarea>
+                                    <textarea name="address" rows="1" class="form-control shadow-none"></textarea>
                                 </div>
                                 <div class="col-md-6 ps-0 mb-3">
                                     <label class="form-label">Password</label>
-                                    <input name="pass register" type="password" class="form-control shadow-none">
+                                    <input name="pass" type="password" class="form-control shadow-none">
                                 </div>
                                 <div class="col-md-6 ps-0 mb-3">
                                     <label class="form-label">Confirm Password</label>
-                                    <input name="cpass register" type="password" class="form-control shadow-none">
+                                    <input name="cpass" type="password" class="form-control shadow-none">
                                 </div>
                             </div>
                         </div>
@@ -120,14 +140,11 @@ require('admin/shares/essentials.php');
         <div class="container py-5">
             <div class="row justify-content-center py-5">
                 <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
-                    <h1
-                        class="display-3 text-white mb-3 animated slideInDown">Enjoy
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">Enjoy
                         Your Vacation With Us</h1>
-                    <div
-                        class="position-relative w-75 mx-auto animated slideInDown">
-                        <input
-                            class="form-control border-0 rounded-pill w-100 py-3 ps-4 pe-5"
-                            type="text" placeholder="Eg: Thailand">
+                    <div class="position-relative w-75 mx-auto animated slideInDown">
+                        <input class="form-control border-0 rounded-pill w-100 py-3 ps-4 pe-5" type="text"
+                            placeholder="Eg: Thailand">
                         <button type="button"
                             class="btn btn-primary rounded-pill py-2 px-4 position-absolute top-0 end-0 me-2"
                             style="margin-top: 7px;">Search</button>

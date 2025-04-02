@@ -1,6 +1,4 @@
-<div
-    class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn"
-    data-wow-delay="0.1s">
+<div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
     <div class="container py-5">
         <div class="row g-5">
             <?php
@@ -11,23 +9,13 @@
             <div class="col-lg-8 col-md-6">
                 <h4 class="text-white mb-3">Contact</h4>
                 <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i><?php echo $contact_r['address'] ?></p>
-                <p class="mb-2"><i
-                        class="fa fa-phone-alt me-3"></i>+<?php echo $contact_r['phone'] ?></p>
-                <p class="mb-2"><i
-                        class="fa fa-envelope me-3"></i><?php echo $contact_r['email'] ?></p>
+                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+<?php echo $contact_r['phone'] ?></p>
+                <p class="mb-2"><i class="fa fa-envelope me-3"></i><?php echo $contact_r['email'] ?></p>
                 <div class="d-flex pt-2">
-                    <a class="btn btn-outline-light btn-social"
-                        href="#"><i
-                            class="fab fa-twitter"></i></a>
-                    <a class="btn btn-outline-light btn-social"
-                        href="#"><i
-                            class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-outline-light btn-social"
-                        href="#"><i
-                            class="fab fa-youtube"></i></a>
-                    <a class="btn btn-outline-light btn-social"
-                        href="#"><i
-                            class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-youtube"></i></a>
+                    <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
             <div class="col-lg-2 col-md-6">
@@ -83,15 +71,15 @@
 
     let register_form = document.getElementById('register_form');
 
-    document.getElementById("register_form").addEventListener("submit", function(e) {
+    document.getElementById("register_form").addEventListener("submit", function (e) {
         e.preventDefault(); // Ngăn chặn reload trang
 
         let formData = new FormData(this);
 
         fetch("/booking-hotel-php/shares/header.php", {
-                method: "POST",
-                body: formData
-            })
+            method: "POST",
+            body: formData
+        })
             .then(response => response.text())
             .then(data => {
                 console.log(data); // Xem kết quả server trả về
@@ -109,7 +97,7 @@
 
     let login_form = document.getElementById('login_form');
 
-    login_form.addEventListener('submit', function(e) {
+    login_form.addEventListener('submit', function (e) {
         e.preventDefault();
         let data = new FormData();
 
@@ -126,7 +114,7 @@
         xhr.open('POST', "ajax/login_regester.php", true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-        xhr.onload = function() {
+        xhr.onload = function () {
             if (this.responseText == 'inv_email_mob') {
                 alert('error', 'Invalid Email or Mobile Number!');
             } else if (this.responseText == 'not_verified') {
@@ -145,7 +133,7 @@
 
     let forgot_form = document.getElementById('forgot_form');
 
-    forgot_form.addEventListener('submit', function(e) {
+    forgot_form.addEventListener('submit', function (e) {
         e.preventDefault();
         let data = new FormData();
 
@@ -160,7 +148,7 @@
         let xhr = new XMLHttpRequest();
         xhr.open('POST', "ajax/login_regester.php", true);
 
-        xhr.onload = function() {
+        xhr.onload = function () {
             if (this.responseText == 'inv_email') {
                 alert('error', 'Invalid Email !');
             } else if (this.responseText == 'not_verified') {
@@ -180,5 +168,16 @@
         xhr.send(data);
     });
 
+    function checkLoginToBook(isLoggedIn, roomId) {
+        if (!isLoggedIn) {
+            var loginModal = new bootstrap.Modal(document.getElementById("loginModal"));
+            loginModal.show();
+            alert('error', 'Please login to booking');
+            console.log('chưa login');
+            window.location.href = `confirm_booking.php?id=${roomId}`;
+        } else {
+            window.location.href = `confirm_booking.php?id=${roomId}`;
+        }
+    }
     setActive();
 </script>
