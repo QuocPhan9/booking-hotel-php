@@ -78,10 +78,8 @@ session_start();
                         </div>
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <button type="submit" class="btn btn-primary rounded-3">Login</button>
-                            <a href="javascript:void(0)"
-                                class="text-secondary text-decoration-none"
-                                data-bs-toggle="modal"
-                                data-bs-target="#forgotPasswordModal"
+                            <a href="javascript:void(0)" class="text-secondary text-decoration-none"
+                                data-bs-toggle="modal" data-bs-target="#forgotPasswordModal"
                                 onclick="closeModal('loginModal')">
                                 Forgot Password?
                             </a>
@@ -150,7 +148,9 @@ session_start();
         </div>
     </div>
     <!-- Modal Forgot Password -->
-    <div class="modal fade" id="forgotPasswordModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">        <div class="modal-dialog">
+    <div class="modal fade" id="forgotPasswordModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <form id="forgotPasswordForm">
                     <div class="modal-header">
@@ -174,7 +174,8 @@ session_start();
         </div>
     </div>
     <!-- Modal Change Password -->
-    <div class="modal fade" id="changePasswordModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="changePasswordLabel" aria-hidden="true">
+    <div class="modal fade" id="changePasswordModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="changePasswordLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <form id="changePasswordForm">
@@ -210,14 +211,11 @@ session_start();
     <div class="container py-5">
         <div class="row justify-content-center py-5">
             <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
-                <h1
-                    class="display-3 text-white mb-3 animated slideInDown">Enjoy
+                <h1 class="display-3 text-white mb-3 animated slideInDown">Enjoy
                     Your Vacation With Us</h1>
-                <div
-                    class="position-relative w-75 mx-auto animated slideInDown">
-                    <input
-                        class="form-control border-0 rounded-pill w-100 py-3 ps-4 pe-5"
-                        type="text" placeholder="Eg: Thailand">
+                <div class="position-relative w-75 mx-auto animated slideInDown">
+                    <input class="form-control border-0 rounded-pill w-100 py-3 ps-4 pe-5" type="text"
+                        placeholder="Eg: Thailand">
                     <button type="button"
                         class="btn btn-primary rounded-pill py-2 px-4 position-absolute top-0 end-0 me-2"
                         style="margin-top: 7px;">Search</button>

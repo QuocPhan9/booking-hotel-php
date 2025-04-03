@@ -16,9 +16,6 @@ if (!isset($_POST['id_room'])) {
 session_start();
 
 // Lưu thông tin vào session ngay lập tức
-$_SESSION['customer_name'] = $_POST['customer_name'] ?? '';
-$_SESSION['customer_email'] = $_POST['customer_email'] ?? '';
-$_SESSION['customer_phone'] = $_POST['customer_phone'] ?? '';
 $_SESSION['note'] = $_POST['note'] ?? '';
 $_SESSION['id_room'] = $_POST['id_room'] ? trim($_POST['id_room']) : '';
 $_SESSION['check_in'] = isset($_POST['checkIn']) ? trim($_POST['checkIn']) : '';

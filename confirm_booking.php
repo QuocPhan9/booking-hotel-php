@@ -3,26 +3,16 @@
 session_start();
 require 'admin/database/db_config.php';
 
-// Process form submission
-// Process form submission
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $_SESSION['customer_name'] = isset($_POST['customer_name']) ? trim($_POST['customer_name']) : '';
-    $_SESSION['customer_email'] = isset($_POST['customer_email']) ? trim($_POST['customer_email']) : '';
-    $_SESSION['customer_phone'] = isset($_POST['customer_phone']) ? trim($_POST['customer_phone']) : '';
-    $_SESSION['note'] = isset($_POST['note']) ? trim($_POST['note']) : '';
-    $_SESSION['id_room'] = isset($_POST['id_room']) ? trim($_POST['id_room']) : '';
+if (isset($_SESSION['uId'])) {
+    $user_id = $_SESSION['uId'];
 
-    // Lưu check-in và check-out vào session
-    $_SESSION['check_in'] = isset($_POST['checkIn']) ? trim($_POST['checkIn']) : '';
-    $_SESSION['check_out'] = isset($_POST['checkOut']) ? trim($_POST['checkOut']) : '';
-
-    // Debugging - check if session values are set
-    echo "<pre>";
-    print_r($_SESSION);
-    echo "</pre>";
+    // Truy vấn lấy thông tin người dùng
+    $stmt = $conn->prepare("SELECT name, email, phonenum FROM user_cred WHERE id = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user_data = $result->fetch_assoc();
 }
-
-
 
 // Get room information
 $room_data = null;
@@ -35,7 +25,14 @@ if (isset($_GET['id'])) {
     $room_data = $result->fetch_assoc();
 }
 
-$id = $_GET['id'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $_SESSION['note'] = isset($_POST['note']) ? trim($_POST['note']) : '';
+    $_SESSION['id_room'] = isset($_POST['id_room']) ? trim($_POST['id_room']) : '';
+    // Lưu check-in và check-out vào session
+    $_SESSION['check_in'] = isset($_POST['checkIn']) ? trim($_POST['checkIn']) : '';
+    $_SESSION['check_out'] = isset($_POST['checkOut']) ? trim($_POST['checkOut']) : '';
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -68,21 +65,27 @@ $id = $_GET['id'];
                         <!-- Input họ tên -->
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="fullName" name="customer_name"
-                                placeholder="Họ và tên" required>
+                                placeholder="Họ và tên"
+                                value="<?= isset($user_data['name']) ? htmlspecialchars($user_data['name']) : '' ?>"
+                                required>
                             <label for="fullName"><i class="fas fa-user me-2"></i>Họ và tên</label>
                         </div>
 
                         <!-- Input số điện thoại -->
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="phone" name="customer_phone"
-                                placeholder="Số điện thoại" required>
+                                placeholder="Số điện thoại"
+                                value="<?= isset($user_data['phonenum']) ? htmlspecialchars($user_data['phonenum']) : '' ?>"
+                                required>
                             <label for="phone"><i class="fas fa-phone me-2"></i>Số điện thoại</label>
                         </div>
 
                         <!-- Input email -->
                         <div class="form-floating mb-3">
                             <input type="email" class="form-control" id="email" name="customer_email"
-                                placeholder="Email" required>
+                                placeholder="Email"
+                                value="<?= isset($user_data['email']) ? htmlspecialchars($user_data['email']) : '' ?>"
+                                required>
                             <label for="email"><i class="fas fa-envelope me-2"></i>Email</label>
                         </div>
 
