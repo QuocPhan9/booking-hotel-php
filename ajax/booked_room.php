@@ -7,7 +7,24 @@ require_once $file_path;
 
 $file_path1 = __DIR__ . '/../admin/shares/essentials.php';
 require_once $file_path1;
+session_start();
 
+if (!isset($_SESSION['uId'])) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'User not logged in'
+    ]);
+    exit;
+}
+
+$user_id = $_SESSION['uId'];
+
+$stmt = $conn->prepare("SELECT u.name, u.email, u.phonenum FROM user_cred u WHERE id =?");
+
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$user_data = $result->fetch_assoc();
 
 $booking_id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
@@ -20,7 +37,7 @@ if ($booking_id == 0) {
 }
 
 $sql = "
-    SELECT b.id, b.room_id, b.check_in, b.check_out, b.order_id, b.amount, b.created_at, b.note, b.transaction_no, b.status, 
+    SELECT b.id, user_id, b.room_id, b.check_in, b.check_out, b.order_id, b.amount, b.created_at, b.note, b.transaction_no, b.status, 
            r.name AS room_name, r.price, r.adult, r.children, r.description
     FROM booking b
     INNER JOIN rooms r ON b.room_id = r.id
@@ -93,7 +110,10 @@ if ($res && $row = mysqli_fetch_assoc($res)) {
         'description' => $row['description'],
         'room_thumb' => $room_thumb,
         'check_in' => $row['check_in'],
-        'check_out' => $row['check_out']
+        'check_out' => $row['check_out'],
+        'name' => $user_data['name'],
+        'email' => $user_data['email'],
+        'phonenum' => $user_data['phonenum']
     ];
 
     // Return the room data as JSON

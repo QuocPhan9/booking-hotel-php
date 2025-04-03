@@ -3,10 +3,6 @@
 session_start();
 
 // Cấu hình cơ sở dữ liệu
-$hname = 'localhost';
-$uname = 'root';
-$pass = '';
-$db = 'db_booking';
 require_once("./config.php");
 require_once("../admin/database/db_config.php");
 
@@ -16,14 +12,23 @@ if ($debug) {
     error_log("Session data: " . print_r($_SESSION, true));
 }
 
+$user_id = $_SESSION['uId'];
+
+$stmt = $conn->prepare("SELECT u.name, u.email, u.phonenum FROM user_cred u WHERE id =?");
+
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$user_data = $result->fetch_assoc();
+
+
+
 // Lấy thông tin từ session
-$customer_name = $_SESSION['customer_name'] ?? '';
-$customer_email = $_SESSION['customer_email'] ?? '';
-$customer_phone = $_SESSION['customer_phone'] ?? '';
 $note = $_SESSION['note'] ?? '';
 $id_room = $_SESSION['id_room'] ?? '';
 $check_in = $_SESSION['check_in'] ?? '';
 $check_out = $_SESSION['check_out'] ?? '';
+
 
 if (empty($customer_name) && isset($_GET['vnp_TxnRef'])) {
     $order_id = $_GET['vnp_TxnRef'];
@@ -35,9 +40,6 @@ if (empty($customer_name) && isset($_GET['vnp_TxnRef'])) {
     $result = $check_stmt->get_result();
 
     if ($row = $result->fetch_assoc()) {
-        $customer_name = $row['customer_name'];
-        $customer_email = $row['customer_email'];
-        $customer_phone = $row['customer_phone'];
         $note = $row['note'];
         $id_room = $_SESSION['id_room'];
         $check_in = $_SESSION['check_in'];
@@ -88,7 +90,7 @@ if ($secureHash == $vnp_SecureHash && isset($_GET['vnp_ResponseCode']) && $_GET[
 
     // Debug: Kiểm tra thông tin trước khi lưu
     if ($debug) {
-        error_log("Payment info: order_id=$order_id, amount=$amount, name=$customer_name, email=$customer_email, phone=$customer_phone, note=$note, room_id=$id_room, check_in=$check_in, check_out=$check_out");
+        error_log("Payment info: order_id=$order_id, amount=$amount, user_id=$user_id note=$note, room_id=$id_room, check_in=$check_in, check_out=$check_out");
     }
 
     // Kiểm tra xem bảng booking đã có cột note chưa        
@@ -98,10 +100,8 @@ if ($secureHash == $vnp_SecureHash && isset($_GET['vnp_ResponseCode']) && $_GET[
         $conn->query("ALTER TABLE booking ADD COLUMN note TEXT");
     }
 
-    // Lưu thông tin vào cơ sở dữ liệu
-    if (!empty($customer_name) || !empty($customer_email) || !empty($customer_phone)) {
-        // Lưu dữ liệu với thông tin khách hàng
-        $sql = "INSERT INTO booking (
+    // Lưu dữ liệu với thông tin khách hàng
+    $sql = "INSERT INTO booking (
                 order_id, 
                 amount, 
                 order_info, 
@@ -109,55 +109,28 @@ if ($secureHash == $vnp_SecureHash && isset($_GET['vnp_ResponseCode']) && $_GET[
                 bank_code, 
                 pay_date, 
                 status, 
-                customer_name, 
-                customer_email, 
-                customer_phone, 
+                user_id, 
                 note,
                 room_id,
                 check_in,
                 check_out
-            ) VALUES (?, ?, ?, ?, ?, ?, 'Success', ?, ?, ?, ?,?,?,?)";
+            ) VALUES (?, ?, ?, ?, ?, ?, 'Success', ?, ?, ?, ?,?)";
 
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param(
-            "sdsssssssssss",
-            $order_id,
-            $amount,
-            $order_info,
-            $transaction_no,
-            $bank_code,
-            $pay_date,
-            $customer_name,
-            $customer_email,
-            $customer_phone,
-            $note,
-            $id_room,
-            $check_in,
-            $check_out
-        );
-    } else {
-        // Lưu dữ liệu không có thông tin khách hàng
-        $sql = "INSERT INTO booking (
-                order_id, 
-                amount, 
-                order_info, 
-                transaction_no, 
-                bank_code, 
-                pay_date, 
-                status
-            ) VALUES (?, ?, ?, ?, ?, ?, 'Success')";
-
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param(
-            "sdssss",
-            $order_id,
-            $amount,
-            $order_info,
-            $transaction_no,
-            $bank_code,
-            $pay_date
-        );
-    }
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param(
+        "sdsssssssss",
+        $order_id,
+        $amount,
+        $order_info,
+        $transaction_no,
+        $bank_code,
+        $pay_date,
+        $user_id,
+        $note,
+        $id_room,
+        $check_in,
+        $check_out
+    );
 
     if ($stmt->execute()) {
         $success = true;
@@ -301,13 +274,13 @@ $conn->close();
                         <div class="info-group">
                             <div class="info-label"><i class="fas fa-user me-2"></i>Thông tin khách hàng</div>
                             <div class="info-value">
-                                <?php if (!empty($_SESSION['customer_name'])): ?>
+                                <?php if (!empty($user_data['name'])): ?>
                                     <p class="mb-1"><strong>Tên:</strong>
-                                        <?php echo htmlspecialchars($_SESSION['customer_name']); ?></p>
+                                        <?php echo htmlspecialchars($user_data['name']); ?></p>
                                     <p class="mb-1"><strong>Email:</strong>
-                                        <?php echo htmlspecialchars($_SESSION['customer_email']); ?></p>
+                                        <?php echo htmlspecialchars($user_data['email']); ?></p>
                                     <p class="mb-1"><strong>SĐT:</strong>
-                                        <?php echo htmlspecialchars($_SESSION['customer_phone']); ?></p>
+                                        <?php echo htmlspecialchars($user_data['phonenum']); ?></p>
                                     <p class="mb-1">
                                         <strong>Check_in:</strong><?php echo htmlspecialchars($_SESSION['check_in']); ?>
                                     </p>
