@@ -1,6 +1,17 @@
 <?php
 require "admin/database/db_config.php";
 require "admin/shares/essentials.php";
+require "vendor/autoload.php";
+
+$client = new Google\Client();
+$client ->setClientId("API_KEY");
+$client ->setClientSecret("API_SECRET");
+$client-> setRedirectUri("http://localhost/booking-hotel-php/redirect.php");
+
+$client ->addScope("email");
+$client ->addScope("profile");
+
+$url = $client->createAuthUrl();
 session_start();
 ?>
 
@@ -78,6 +89,7 @@ session_start();
                         </div>
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <button type="submit" class="btn btn-primary rounded-3">Login</button>
+                            <a href="<?= $url ?>" class="btn btn-danger rounded-3">Login with Google</a>
                             <a href="javascript:void(0)" class="text-secondary text-decoration-none"
                                 data-bs-toggle="modal" data-bs-target="#forgotPasswordModal"
                                 onclick="closeModal('loginModal')">
